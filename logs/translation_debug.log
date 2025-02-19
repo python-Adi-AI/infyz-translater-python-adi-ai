@@ -1,0 +1,18 @@
+2025-02-18 16:11:26,215 - INFO: Attempting to load model: facebook/m2m100_418M
+2025-02-18 16:11:26,215 - INFO: Using device: cpu
+2025-02-18 16:11:26,219 - DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2025-02-18 16:11:26,546 - DEBUG: https://huggingface.co:443 "HEAD /facebook/m2m100_418M/resolve/main/config.json HTTP/1.1" 200 0
+2025-02-18 16:11:26,848 - DEBUG: https://huggingface.co:443 "HEAD /facebook/m2m100_418M/resolve/main/config.json HTTP/1.1" 200 0
+2025-02-18 16:11:27,074 - DEBUG: https://huggingface.co:443 "HEAD /facebook/m2m100_418M/resolve/main/model.safetensors HTTP/1.1" 404 0
+2025-02-18 16:11:27,079 - DEBUG: Starting new HTTPS connection (1): huggingface.co:443
+2025-02-18 16:11:27,705 - DEBUG: https://huggingface.co:443 "HEAD /facebook/m2m100_418M/resolve/main/generation_config.json HTTP/1.1" 200 0
+2025-02-18 16:11:27,742 - DEBUG: https://huggingface.co:443 "GET /api/models/facebook/m2m100_418M HTTP/1.1" 200 5644
+2025-02-18 16:11:27,929 - DEBUG: https://huggingface.co:443 "HEAD /facebook/m2m100_418M/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-02-18 16:11:28,405 - DEBUG: https://huggingface.co:443 "GET /api/models/facebook/m2m100_418M/commits/main HTTP/1.1" 200 4011
+2025-02-18 16:11:28,760 - DEBUG: https://huggingface.co:443 "GET /api/models/facebook/m2m100_418M/discussions?p=0 HTTP/1.1" 200 14811
+2025-02-18 16:11:29,188 - DEBUG: https://huggingface.co:443 "GET /api/models/facebook/m2m100_418M/commits/refs%2Fpr%2F27 HTTP/1.1" 200 4976
+2025-02-18 16:11:29,441 - DEBUG: https://huggingface.co:443 "HEAD /facebook/m2m100_418M/resolve/refs%2Fpr%2F27/model.safetensors.index.json HTTP/1.1" 404 0
+2025-02-18 16:11:29,707 - DEBUG: https://huggingface.co:443 "HEAD /facebook/m2m100_418M/resolve/refs%2Fpr%2F27/model.safetensors HTTP/1.1" 302 0
+2025-02-18 16:11:31,021 - INFO: Model compiled successfully with torch.compile()
+2025-02-18 16:11:31,041 - WARNING:  * Debugger is active!
+2025-02-18 16:11:31,050 - INFO:  * Debugger PIN: 180-450-242

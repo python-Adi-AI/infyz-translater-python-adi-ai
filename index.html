@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2024 Infyz Python-ADI-AI
+All rights reserved.
+
+Developed by: Infyz
+Project: Python-ADI-AI
+Description: Advanced AI Translation Web Interface
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+1. Redistributions of source code must retain the above copyright notice, 
+   this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright notice, 
+   this list of conditions and the following disclaimer in the documentation 
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+ARE DISCLAIMED.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HICT Translation Application</title>
+  <style>
+    /* Responsive Reset and Modern Design */
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #34495e;
+      --accent-color: #3498db;
+      --background-light: #f4f6f9;
+      --text-color: #333;
+      --transition-speed: 0.3s;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: var(--background-light);
+      color: var(--text-color);
+    }
+
+    /* Responsive Container */
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Sidebar Enhancements */
+    .sidebar {
+      width: 250px;
+      background-color: var(--primary-color);
+      color: white;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: -250px;
+      transition: left var(--transition-speed) ease;
+      z-index: 1000;
+      overflow-y: auto;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar-header {
+      text-align: center;
+      padding: 20px;
+      background-color: var(--secondary-color);
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .sidebar ul li a {
+      display: block;
+      color: white;
+      padding: 12px 15px;
+      text-decoration: none;
+      transition: background-color var(--transition-speed);
+    }
+
+    .sidebar ul li a:hover {
+      background-color: var(--accent-color);
+    }
+
+    /* Hamburger Menu */
+    .hamburger-menu {
+      display: block;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1100;
+      cursor: pointer;
+      width: 30px;
+      height: 20px;
+    }
+
+    .hamburger-menu span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary-color);
+      margin-bottom: 5px;
+      transition: all var(--transition-speed);
+    }
+
+    /* Responsive Dropdown */
+    .dropdown {
+      position: relative;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .dropdown-btn {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 12px 15px;
+      border: none;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color var(--transition-speed);
+    }
+
+    .dropdown-btn:hover {
+      background-color: var(--accent-color);
+    }
+
+    .dropdown-content {
+      display: none;
+      background-color: var(--secondary-color);
+      width: 100%;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background-color var(--transition-speed);
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--accent-color);
+    }
+
+    /* Responsive Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .navbar h1 {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+    }
+
+    /* Responsive Table */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    }
+
+    table th, table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    table thead {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    /* Responsive Breakpoints */
+    @media screen and (min-width: 768px) {
+      .sidebar {
+        left: 0;
+      }
+
+      body {
+        padding-left: 250px;
+      }
+
+      .hamburger-menu {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar h1 {
+        margin-bottom: 10px;
+      }
+
+      .dropdown-container {
+        width: 100%;
+      }
+    }
+
+    /* Modal Responsiveness */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1500;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 5px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .action-buttons button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color var(--transition-speed);
+    }
+
+    .btn-edit { background-color: var(--accent-color); color: white; }
+    .btn-delete { background-color: #e74c3c; color: white; }
+    .btn-print { background-color: #2ecc71; color: white; }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2 class="sidebar-header">Modules</h2>
+    <ul>
+      <li><a href="#" data-translate="Dashboard">Dashboard</a></li>
+      <li><a href="#" data-translate="Commercial">Commercial</a></li>
+      <li><a href="#" data-translate="Marine">Marine</a></li>
+      <li><a href="#" data-translate="Planning">Planning</a></li>
+      <li><a href="#" data-translate="Customs">Customs</a></li>
+      <li><a href="#" data-translate="Operations">Operations</a></li>
+      <li><a href="#" data-translate="Transport">Transport</a></li>
+      <li><a href="#" data-translate="Invoice">Invoice</a></li>
+      <li><a href="#" data-translate="Reports">Reports</a></li>
+      <li><a href="#" data-translate="Admin">Admin</a></li>
+      <li><a href="#" data-translate="EDI">EDI</a></li>
+      <li><a href="#" data-translate="SSR">SSR</a></li>
+      <li><a href="#" data-translate="Help">Help</a></li>
+    </ul>
+  </div>
+  
+  <!-- Hamburger Menu -->
+  <div class="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  
+  <!-- Main content area -->
+  <div class="container">
+    <header class="navbar">
+      <h1 data-translate="HICT Application - Local Server">HICT Application - Local Server</h1>
+      <div class="dropdown-container">
+        <span data-translate="Welcome: INFYZ">Welcome: INFYZ</span>
+        <select id="languageSelect" multiple onchange="translatePage()">
+          <!-- Static languages for testing -->
+          <option value="en">EN - English</option>
+          <option value="fr">FR - French</option>
+          <option value="de">DE - German</option>
+          <option value="es">ES - Spanish</option>
+          <option value="it">IT - Italian</option>
+          <option value="pt">PT - Portuguese</option>
+          <option value="hi">HI - Hindi</option>
+          <option value="ta">TA - Tamil</option>
+        </select>
+      </div>
+    </header>
+    
+    <main>
+      <h2 id="welcomeText" data-translate="Welcome to the HICT Application">Welcome to the HICT Application</h2>
+      <p id="instructionText" data-translate="Select a module from the sidebar to get started.">Select a module from the sidebar to get started.</p>
+    </main>
+  </div>
+
+  <script>
+    // Fetch the supported languages from the backend and populate the dropdown
+    function loadLanguages() {
+      const languageSelect = document.getElementById('languageSelect');
+      const url = 'http://99.99.96.53:5000/languages';  // Assuming this endpoint returns the list of languages as a JSON object
+
+      fetch(url)
+        .then(response => response.json())
+        .then(languages => {
+          // Log the languages to the console to verify they are received
+          console.log('Languages fetched:', languages);
+          
+          // Clear existing options (if any)
+          languageSelect.innerHTML = '';
+
+          // Loop through the languages object and create options for the dropdown
+          for (const lang of languages) {
+            const option = document.createElement('option');
+            option.value = lang.code;  // Set value as the language code (e.g., 'en', 'fr')
+            option.innerText = `${lang.code.toUpperCase()} - ${lang.name}`;  // Display language code and name (e.g., 'EN - English')
+            languageSelect.appendChild(option);
+          }
+        })
+        .catch(error => {
+          console.error('Error loading languages:', error);
+        });
+    }
+
+    // Function to translate page content based on selected languages
+    function translatePage() {
+      const selectedLanguages = Array.from(document.getElementById('languageSelect').selectedOptions).map(option => option.value);
+      const url = 'http://99.99.96.53:5000/translate';
+      
+      // Translate all elements with data-translate attribute
+      document.querySelectorAll('[data-translate]').forEach(el => {
+        const text = el.getAttribute('data-translate');
+        
+        selectedLanguages.forEach(lang => {
+          fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              text: text, 
+              source_lang: "en",  // Assuming the default source language is English
+              target_lang: lang   // Send the selected language as the target language
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            // Update the content of the element for each language
+            el.innerText = data.translation || text;
+          })
+          .catch(error => {
+            console.error('Translation error:', error);
+            el.innerText = text; // Fallback to original text
+          });
+        });
+      });
+    }
+
+    // Add event listener to hamburger menu
+    document.querySelector('.hamburger-menu').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

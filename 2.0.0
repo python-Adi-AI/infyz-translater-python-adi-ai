@@ -1,0 +1,9 @@
+Collecting onnx
+  Using cached onnx-1.17.0-cp312-cp312-win_amd64.whl.metadata (16 kB)
+Requirement already satisfied: onnxruntime in c:\users\infyz\desktop\lan-model\venv\lib\site-packages (1.20.1)
+Collecting onnxoptimizer
+  Using cached onnxoptimizer-0.3.13.tar.gz (18.5 MB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'error'
