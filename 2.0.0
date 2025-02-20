@@ -7,3 +7,5 @@ Collecting onnxoptimizer
   Installing build dependencies: finished with status 'done'
   Getting requirements to build wheel: started
   Getting requirements to build wheel: finished with status 'error'
+python -m venv django_venv
+django_venv\Scripts\activate
