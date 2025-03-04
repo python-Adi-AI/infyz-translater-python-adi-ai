@@ -38,13 +38,32 @@ except Exception as e:
 torch.backends.cuda.matmul.allow_tf32 = True
 
 # Initialize Redis connection
+# try:
+#     redis_cache = redis.Redis(host="localhost", port=6379, db=0, decode_responses=True)
+#     if redis_cache.ping():
+#         print("✅ Redis connected successfully!")
+# except Exception as e:
+#     print(f"⚠️ Redis connection failed: {e}")
+#     redis_cache = None  # Disable caching if Redis is not available
+
+
+
 try:
-    redis_cache = redis.Redis(host="localhost", port=6379, db=0, decode_responses=True)
+    redis_cache = redis.Redis(
+        host="localhost",
+        port=6379,
+        db=0,
+        password="aiteam-redis",  # Add your Redis password here
+        decode_responses=True
+    )
     if redis_cache.ping():
         print("✅ Redis connected successfully!")
 except Exception as e:
     print(f"⚠️ Redis connection failed: {e}")
     redis_cache = None  # Disable caching if Redis is not available
+
+
+
 
 # Supported language codes
 LANG_CODE_MAP = {
