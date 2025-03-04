@@ -9,6 +9,7 @@ def download_translation_model(model_name="Helsinki-NLP/opus-mt-en-fr", save_pat
     """
     try:
         model = MarianMTModel.from_pretrained(model_name)
+   
         model.save_pretrained(save_path)
         print(f"Model '{model_name}' downloaded and saved in '{save_path}'.")
     except Exception as e:
